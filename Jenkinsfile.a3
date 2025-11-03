@@ -1,0 +1,14 @@
+pipeline {
+  agent any
+  options { timestamps() }
+  stages {
+    stage('Install') { steps { sh 'pip install -e .' } }
+    stage('A3 Run') { steps { sh 'exp agent run -m experiments/a3.rag.yaml' } }
+    stage('RAG Eval') { steps { sh 'exp rag eval -m experiments/a3.rag.yaml' } }
+  }
+  post {
+    always {
+      archiveArtifacts artifacts: 'out/a3/*.md, out/a3/*.json', onlyIfSuccessful: false
+    }
+  }
+}
