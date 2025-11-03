@@ -1,0 +1,32 @@
+experiment:
+  id: a3-demo
+  seed: 212
+  mlflow:
+    uri: http://127.0.0.1:5000
+    experiment_name: exp-lab/A3
+  dataset:
+    mode: generate
+    provider: toy-lang-lab
+    recipe: minimal_24
+    out_dir: out/dataset
+    split: {train: 0.6, dev: 0.2, test: 0.2}
+    hide: { strategy: by_word, value: key, apply_to: train, export_hidden_test: true }
+  model:
+    provider: ttlab
+    arch: baseline
+    d_model: 8
+    n_layers: 1
+    epochs: 3
+    batch_size: 32
+    finetune_from: null
+  rag:
+    corpus_dir: data/rag_demo
+    index_dir: out/a3/index
+    top_k: 3
+    eval_pairs: data/rag_demo/qa_pairs.jsonl
+  hitl:
+    run_dir: out/a3/run_001
+    edits_path: out/a3/hitl/edits.jsonl
+    hard_set_path: out/a3/hitl/hard_set.jsonl
+  artifacts:
+    base_dir: out/a3/run_001
