@@ -1,0 +1,9 @@
+pipeline {
+  agent any
+  options { timestamps() }
+  stages {
+    stage('Install') { steps { sh 'pip install -e .' } }
+    stage('Sweep') { steps { sh 'exp sweep -m experiments/a2.sweep.yaml' } }
+  }
+  post { always { archiveArtifacts artifacts: 'out/a2/**/summary.*', onlyIfSuccessful: false } }
+}

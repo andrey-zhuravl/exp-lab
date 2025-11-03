@@ -1,30 +1,27 @@
 experiment:
-  id: a1-minimal
+  id: a2-single
   seed: 212
   mlflow:
     uri: http://127.0.0.1:5000
-    experiment_name: exp-lab/A1
+    experiment_name: exp-lab/A2
   dataset:
     mode: generate
     provider: toy-lang-lab
     recipe: minimal_24
-    input_file: null
     out_dir: out/dataset
     split: {train: 0.6, dev: 0.2, test: 0.2}
-    hide:
-      strategy: by_word
-      value: key
-      apply_to: train
-      export_hidden_test: true
+    size: 96
+    noise: { p_drop: 0.0 }
+    hide: { strategy: by_word, value: key, apply_to: train, export_hidden_test: true }
   model:
     provider: ttlab
     arch: baseline
-    d_model: 8
-    n_layers: 1
+    d_model: 16
+    n_layers: 2
     epochs: 3
     batch_size: 32
   evaluation:
     targets: [visible, hidden]
     metrics: [loss, token_acc]
   artifacts:
-    base_dir: out/a1
+    base_dir: out/a2/single

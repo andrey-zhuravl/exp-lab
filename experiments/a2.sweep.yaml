@@ -1,0 +1,15 @@
+sweep:
+  id: a2-demo
+  base: experiments/a1.quickstart.yaml
+  grid:
+    model.d_model: [8, 16]
+    model.n_layers: [1, 2]
+    dataset.hide.value: ["key", "book"]
+    dataset.size: [24, 96]
+    dataset.noise.p_drop: [0.0, 0.1]
+  seeds: [212, 313]
+  mlflow:
+    experiment_name: exp-lab/A2
+    tags: { grid_id: a2-demo }
+  out_dir: out/a2
+  max_parallel: 1

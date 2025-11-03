@@ -7,17 +7,12 @@ packages = [{ include = "exp_lab" }]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
-typer = "^0.12.5"
-PyYAML = "^6.0.2"
-mlflow = "^2.16.0"
-pydantic = "^2.8.0"
-rich = "^13.7.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.0"
 
 [tool.poetry.scripts]
-exp = "exp_lab.cli:app"
+exp = "exp_lab.cli:main"
 
 [build-system]
 requires = ["poetry-core>=1.8.1"]
